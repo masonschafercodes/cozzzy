@@ -49,7 +49,6 @@ The core foundation of the template is built with the following:
 The rest of the stuff listed was used to implement the features included in the template:
 
 - **[Tailwind](https://tailwindcss.com/)**
-- **[React Hook Form](https://react-hook-form.com/)**
 - **[NextAuth.js](https://next-auth.js.org/)**
 
 ## Features
