@@ -1,4 +1,6 @@
-Basic project template that makes it easier to be more productive right out the gate.
+<p align="center">
+  <img width="350" height="75" src="https://i.ibb.co/Rb6Rmzz/cozzzy.png">
+</p>
 
 # Getting Started
 
