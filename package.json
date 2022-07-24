@@ -1,7 +1,11 @@
 {
 	"name": "cozzzy",
-	"version": "0.1.0",
+	"version": "0.0.0",
 	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/masonschafercodes/cozzzy.git"
+	},
 	"scripts": {
 		"dev": "concurrently -c green.bold,blue.bold 'yarn:dev:docker' 'yarn:dev:next'",
 		"dev:docker": "docker compose up",
