@@ -1,34 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Basic project template that makes it easier to be more productive right out the gate.
 
-## Getting Started
+# Getting Started
 
-First, run the development server:
+First step is to install the required deps:
 
 ```bash
-npm run dev
-# or
-yarn dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You'll need to make a copy of the example environment file into your local `.env` file
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+cp .env.example .env
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+During your initial setup process, you will need to ensure that your DB is setup properly.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- The first thing you need to do is get your Docker container setup and started:
 
-## Learn More
+```bash
+pnpm dev:docker
+```
 
-To learn more about Next.js, take a look at the following resources:
+- Run your migrations by using the following command:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm db:migrate:dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+You should now be able to start the dev environment fully. This will concurrently start your Docker container and NextJS server.
 
-## Deploy on Vercel
+```bash
+pnpm dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The new project should now be available on: [localhost:3000](http://localhost:3000)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Core Tech
+
+The core foundation of the template is built with the following:
+
+- **[Next.js](https://nextjs.org/)**
+- **[Prisma](https://www.prisma.io/)**
+- **[TypeScript](https://www.typescriptlang.org/)**
+
+The rest of the stuff listed was used to implement the features included in the template:
+
+- **[Tailwind](https://tailwindcss.com/)**
+- **[React Hook Form](https://react-hook-form.com/)**
+- **[NextAuth.js](https://next-auth.js.org/)**
+
+## Features
+
+- Auth with NextAuth.js
+- Authenticated routes and data.
+- Pre-configured Next.js API routes
