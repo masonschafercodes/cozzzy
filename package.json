@@ -18,7 +18,8 @@
 		"prettier:check": "prettier --check \"./src/**/*.{ts,tsx}\"",
 		"db:generate": "prisma generate",
 		"db:seed": "yarn prisma db seed",
-		"db:migrate:dev": "yarn prisma migrate dev"
+		"db:migrate:dev": "yarn prisma migrate dev",
+		"prepare": "husky install"
 	},
 	"dependencies": {
 		"@headlessui/react": "^1.6.6",
@@ -39,6 +40,7 @@
 		"concurrently": "^7.3.0",
 		"eslint": "8.20.0",
 		"eslint-config-next": "12.2.3",
+		"husky": "^8.0.0",
 		"lint-staged": "^13.0.3",
 		"postcss": "^8.4.14",
 		"prettier": "^2.7.1",
