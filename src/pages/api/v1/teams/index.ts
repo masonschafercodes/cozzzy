@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { CozzyError } from '~/CozzyProviders/CozzyErrors';
 import CozzyPrismaProvider from '~/CozzyProviders/CozzyPrismaProvider';
-import { prisma } from '~/utils/prisma';
 
 /**
  * You need to provide an action for every thing you want to do with the API.
