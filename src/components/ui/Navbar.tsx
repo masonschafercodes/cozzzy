@@ -4,12 +4,14 @@ import React from 'react';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import { useRouter } from 'next/router';
 
 function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(' ');
 }
 
 export default function Navbar({ session }: { session: Session | null }) {
+	const router = useRouter();
 	return (
 		<Disclosure as="nav">
 			{({ open }) => (
@@ -18,10 +20,16 @@ export default function Navbar({ session }: { session: Session | null }) {
 						<div className="flex items-center justify-between h-16">
 							<div className="flex items-center">
 								<div className="flex-shrink-0">
-									<h1 className="hidden lg:block h-8 w-auto font-semibold text-2xl">
+									<h1
+										onClick={() => router.push('/')}
+										className="hidden lg:block h-8 w-auto font-semibold text-2xl hover:cursor-pointer"
+									>
 										Cozzzy
 									</h1>
-									<h1 className="block lg:hidden h-8 w-auto font-semibold text-2xl">
+									<h1
+										onClick={() => router.push('/')}
+										className="block lg:hidden h-8 w-auto font-semibold text-2xl hover:cursor-pointer"
+									>
 										Cozzzy
 									</h1>
 								</div>
@@ -58,13 +66,13 @@ export default function Navbar({ session }: { session: Session | null }) {
 													<Menu.Item>
 														{({ active }) => (
 															<a
-																href="#"
+																href="/team"
 																className={classNames(
 																	active ? 'bg-gray-100' : '',
 																	'block px-4 py-2 text-sm text-gray-700',
 																)}
 															>
-																Your Profile
+																Team
 															</a>
 														)}
 													</Menu.Item>
@@ -148,10 +156,10 @@ export default function Navbar({ session }: { session: Session | null }) {
 								<div className="mt-3 px-2 space-y-1">
 									<Disclosure.Button
 										as="a"
-										href="#"
+										href="/team"
 										className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
 									>
-										Your Profile
+										Team
 									</Disclosure.Button>
 									<Disclosure.Button
 										as="a"

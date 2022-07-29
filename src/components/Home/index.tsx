@@ -1,22 +1,16 @@
 import { useSession } from 'next-auth/react';
+import Hero from '../ui/Hero';
 import Navbar from '../ui/Navbar';
 
-export function Home({ user, hasTeam }: { user: any; hasTeam: boolean }) {
+export function Home() {
 	const { data: session } = useSession();
 
 	return (
 		<div>
-			<div>
-				<Navbar session={session} />
-				<div>
-					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-						<pre>
-							<code>{JSON.stringify(user, null, 2)}</code>
-						</pre>
-						<pre>
-							<code>On a Team: {JSON.stringify(hasTeam, null, 2)}</code>
-						</pre>
-					</div>
+			<Navbar session={session} />
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="mt-12">
+					<Hero />
 				</div>
 			</div>
 		</div>
