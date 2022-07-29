@@ -1,4 +1,5 @@
 import { prisma } from '~/utils/prisma';
+import { TeamInviteNotFound } from '../CozzyErrors/TeamInviteNotFound';
 import { UserAlreadyInTeamError } from '../CozzyErrors/UserAlreadyInATeamError';
 import { UserNotFoundError } from '../CozzyErrors/UserNotFoundError';
 
@@ -101,10 +102,10 @@ export default class CozzyPrismaProvider {
 		const user = await this.getUserByEmail(teamInviteData.email);
 
 		if (!user) {
-			throw new UserNotFoundError('User was not found!');
+			throw new UserNotFoundError('User was not found.');
 		}
 		if (user.teamId) {
-			throw new UserAlreadyInTeamError('User is already in a team!');
+			throw new UserAlreadyInTeamError('User is already in a team.');
 		}
 
 		return await prisma.teamInvite.create({
@@ -120,13 +121,13 @@ export default class CozzyPrismaProvider {
 		const teamInvite = await this.getTeamInviteById(teamInviteId);
 
 		if (!teamInvite) {
-			throw new Error('Team invite not found');
+			throw new TeamInviteNotFound('Team invite not found');
 		}
 
 		const user = await this.getUserById(teamInvite.userId);
 
 		if (!user) {
-			throw new UserNotFoundError('User not found!');
+			throw new UserNotFoundError('User not found.');
 		}
 
 		const team = await prisma.team.update({

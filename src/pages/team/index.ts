@@ -24,12 +24,15 @@ export async function getServerSideProps(ctx: any) {
 			};
 		}
 
+		const user = await cp.getUserByEmail(session?.user?.email as string);
+
 		const teamMembers = await cp.getTeamMembers(team.id);
 
 		return {
 			props: {
 				teamMembers,
 				teamName: team.name,
+				userId: user?.id,
 			},
 		};
 	}

@@ -3,7 +3,13 @@ import { User } from '@prisma/client';
 import React from 'react';
 import { Button } from './Button';
 
-export default function TeamMembersCards({ people }: { people: User[] }) {
+export default function TeamMembersCards({
+	people,
+	userId,
+}: {
+	people: User[];
+	userId: string;
+}) {
 	async function removeTeamMember(userId: string, teamId: string) {
 		const response = await fetch('/api/v1/teams', {
 			method: 'POST',
@@ -66,20 +72,25 @@ export default function TeamMembersCards({ people }: { people: User[] }) {
 										<span className="ml-3">Email</span>
 									</a>
 								</div>
-								<div className="-ml-px w-0 flex-1 flex">
-									<Button
-										onClick={async () =>
-											await removeTeamMember(person.id, person.teamId as string)
-										}
-										className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-red-500 font-medium border border-transparent rounded-br-lg hover:text-red-300"
-									>
-										<XIcon
-											className="w-5 h-5 text-gray-400"
-											aria-hidden="true"
-										/>
-										<span className="ml-3">Remove from Team</span>
-									</Button>
-								</div>
+								{person.id !== userId && (
+									<div className="-ml-px w-0 flex-1 flex">
+										<Button
+											onClick={async () =>
+												await removeTeamMember(
+													person.id,
+													person.teamId as string,
+												)
+											}
+											className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-red-500 font-medium border border-transparent rounded-br-lg hover:text-red-300"
+										>
+											<XIcon
+												className="w-5 h-5 text-gray-400"
+												aria-hidden="true"
+											/>
+											<span className="ml-3">Remove from Team</span>
+										</Button>
+									</div>
+								)}
 							</div>
 						</div>
 					</li>

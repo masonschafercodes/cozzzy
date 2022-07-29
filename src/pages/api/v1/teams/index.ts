@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { CozzyError } from '~/CozzyProviders/CozzyErrors';
 import CozzyPrismaProvider from '~/CozzyProviders/CozzyPrismaProvider';
 
 /**
@@ -79,7 +78,7 @@ export default async function teamsAPIHandler(
 				const teamInvite = await cp.createTeamInviteByEmail({ teamId, email });
 				return res.status(200).json(teamInvite);
 			} catch (e: any) {
-				return res.status(400).json({ error: e.message });
+				return res.status(400).json({ name: e.name, error: e.message });
 			}
 		} else if (action === 'accept-team-invite') {
 			const { teamInviteId }: { teamInviteId: string | null } = req.body;
@@ -91,7 +90,7 @@ export default async function teamsAPIHandler(
 				const acceptedTeamInvite = await cp.acceptTeamInvite(teamInviteId);
 				return res.status(200).json(acceptedTeamInvite);
 			} catch (e: any) {
-				return res.status(400).json({ error: e.message });
+				return res.status(400).json({ name: e.name, error: e.message });
 			}
 		} else {
 			return res.status(400).json({ error: 'Invalid action' });

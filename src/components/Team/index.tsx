@@ -7,9 +7,11 @@ import TeamMembersCards from '../ui/TeamMembersCards';
 export function Team({
 	teamMembers,
 	teamName,
+	userId,
 }: {
 	teamMembers: User[];
 	teamName: string;
+	userId: string;
 }) {
 	const { data: session } = useSession();
 	return (
@@ -22,7 +24,7 @@ export function Team({
 					</h1>
 				</div>
 				<div className="mt-12">
-					<TeamMembersCards people={teamMembers} />
+					<TeamMembersCards people={teamMembers} userId={userId} />
 				</div>
 			</div>
 		</>
