@@ -1,14 +1,14 @@
-version: "3"
+version: '3'
 
 services:
   postgres:
-    container_name: "template"
+    container_name: 'monster-audit-postgres'
     restart: unless-stopped
-    image: "postgres:13"
+    image: 'postgres:13'
     ports:
-      - "15432:5432"
+      - '15432:5432'
     volumes:
-      - "pgdata:/var/lib/postgresql/data/"
+      - 'pgdata:/var/lib/postgresql/data/'
     environment:
       POSTGRES_PASSWORD: postgres
 

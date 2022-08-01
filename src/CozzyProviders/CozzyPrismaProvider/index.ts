@@ -1,5 +1,7 @@
+import { PERMISSION } from '@prisma/client';
 import { prisma } from '~/utils/prisma';
 import { TeamInviteNotFound } from '../CozzyErrors/TeamInviteNotFound';
+import { TeamNotFound } from '../CozzyErrors/TeamNotFound';
 import { UserAlreadyInTeamError } from '../CozzyErrors/UserAlreadyInATeamError';
 import { UserNotFoundError } from '../CozzyErrors/UserNotFoundError';
 
@@ -108,10 +110,39 @@ export default class CozzyPrismaProvider {
 			throw new UserAlreadyInTeamError('User is already in a team.');
 		}
 
+		const team = await this.getTeamById(teamInviteData.teamId);
+
+		if (!team) {
+			throw new TeamNotFound('Team was not found.');
+		}
+
 		return await prisma.teamInvite.create({
 			data: {
 				teamId: teamInviteData.teamId,
 				userId: user.id,
+			},
+		});
+	}
+
+	// Reject a team invite
+	async rejectTeamInvite(teamInviteId: string) {
+		const teamInvite = await this.getTeamInviteById(teamInviteId);
+
+		if (!teamInvite) {
+			throw new TeamInviteNotFound('Team invite not found');
+		}
+
+		await prisma.teamInvite.delete({ where: { id: teamInviteId } });
+
+		return teamInvite;
+	}
+
+	// Promote User to Admin
+	async changeUserPermissions(userId: string, permRole: PERMISSION) {
+		return await prisma.user.update({
+			where: { id: userId },
+			data: {
+				permission: permRole,
 			},
 		});
 	}

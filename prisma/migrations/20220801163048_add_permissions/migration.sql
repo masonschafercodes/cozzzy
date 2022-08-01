@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "PERMISSION" AS ENUM ('ADMIN', 'USER', 'NONE');
+
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "permission" "PERMISSION" DEFAULT 'NONE';

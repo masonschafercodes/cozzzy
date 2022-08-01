@@ -1,5 +1,5 @@
 {
-	"name": "cozzzy",
+	"name": "monster-audit",
 	"version": "0.0.0",
 	"private": true,
 	"repository": {
@@ -17,8 +17,9 @@
 		"prettier": "prettier --write \"./src/**/*.{ts,tsx}\"",
 		"prettier:check": "prettier --check \"./src/**/*.{ts,tsx}\"",
 		"db:generate": "prisma generate",
-		"db:seed": "yarn prisma db seed",
-		"db:migrate:dev": "yarn prisma migrate dev",
+		"db:seed": "prisma db seed",
+		"db:migrate:dev": "prisma migrate dev",
+		"db:studio": "prisma studio",
 		"prepare": "husky install"
 	},
 	"dependencies": {

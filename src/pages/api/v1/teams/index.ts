@@ -1,3 +1,4 @@
+import { PERMISSION } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import CozzyPrismaProvider from '~/CozzyProviders/CozzyPrismaProvider';
 
@@ -63,6 +64,22 @@ export default async function teamsAPIHandler(
 			const team = await cp.removeUserFromTeam(userId, teamId);
 
 			res.status(200).json(team);
+		} else if (action === 'change-team-member-permissions') {
+			const {
+				userId,
+				permRole,
+			}: { userId: string | null; permRole: PERMISSION | null } = req.body;
+
+			if (!userId) return res.status(400).json({ error: 'Missing userId' });
+			if (!permRole) return res.status(400).json({ error: 'Missing permRole' });
+
+			const user = await cp.changeUserPermissions(userId, permRole);
+
+			res.status(200).json({
+				status: 'success',
+				message: 'User promoted to admin',
+				user,
+			});
 		} else {
 			return res.status(400).json({ error: 'Invalid action' });
 		}
@@ -89,6 +106,21 @@ export default async function teamsAPIHandler(
 			try {
 				const acceptedTeamInvite = await cp.acceptTeamInvite(teamInviteId);
 				return res.status(200).json(acceptedTeamInvite);
+			} catch (e: any) {
+				return res.status(400).json({ name: e.name, error: e.message });
+			}
+		} else if (action === 'reject-team-invite') {
+			const { teamInviteId }: { teamInviteId: string | null } = req.body;
+
+			if (!teamInviteId)
+				return res.status(400).json({ error: 'Missing teamInviteId' });
+
+			try {
+				await cp.rejectTeamInvite(teamInviteId);
+				return res.status(200).json({
+					status: 'success',
+					message: 'Team invite rejected',
+				});
 			} catch (e: any) {
 				return res.status(400).json({ name: e.name, error: e.message });
 			}

@@ -33,6 +33,7 @@ export async function getServerSideProps(ctx: any) {
 				teamMembers,
 				teamName: team.name,
 				userId: user?.id,
+				userPermission: user?.permission,
 			},
 		};
 	}

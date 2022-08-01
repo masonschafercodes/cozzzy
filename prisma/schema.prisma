@@ -64,6 +64,7 @@ model User {
   emailVerified DateTime?
   image         String?
   teamId        String?
+  permission    PERMISSION?  @default(USER)
   accounts      Account[]
   sessions      Session[]
   teamInvites   TeamInvite[]
@@ -77,4 +78,10 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum PERMISSION {
+  ADMIN
+  USER
+  NONE
 }

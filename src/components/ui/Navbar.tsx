@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @next/next/no-html-link-for-pages */
 import { Session } from 'next-auth';
 import { signIn, signOut } from 'next-auth/react';
 import React from 'react';
@@ -62,14 +64,14 @@ export default function Navbar({ session }: { session: Session | null }) {
 												leaveFrom="transform opacity-100 scale-100"
 												leaveTo="transform opacity-0 scale-95"
 											>
-												<Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+												<Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 z-40 rounded-md shadow-lg py-1 bg-brand-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
 													<Menu.Item>
 														{({ active }) => (
 															<a
 																href="/team"
 																className={classNames(
-																	active ? 'bg-gray-100' : '',
-																	'block px-4 py-2 text-sm text-gray-700',
+																	active ? 'bg-brand-500' : '',
+																	'block px-4 py-2 text-sm text-gray-400',
 																)}
 															>
 																Team
@@ -81,8 +83,8 @@ export default function Navbar({ session }: { session: Session | null }) {
 															<a
 																href="#"
 																className={classNames(
-																	active ? 'bg-gray-100' : '',
-																	'block px-4 py-2 text-sm text-gray-700',
+																	active ? 'bg-brand-500' : '',
+																	'block px-4 py-2 text-sm text-gray-400',
 																)}
 															>
 																Settings
@@ -93,8 +95,8 @@ export default function Navbar({ session }: { session: Session | null }) {
 														{({ active }) => (
 															<button
 																className={classNames(
-																	active ? 'bg-gray-100' : '',
-																	'block px-4 py-2 text-sm text-gray-700 w-full text-left',
+																	active ? 'bg-brand-500' : '',
+																	'block px-4 py-2 text-sm text-gray-400 w-full text-left',
 																)}
 																onClick={() => signOut()}
 															>
@@ -157,21 +159,21 @@ export default function Navbar({ session }: { session: Session | null }) {
 									<Disclosure.Button
 										as="a"
 										href="/team"
-										className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+										className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-brand-800"
 									>
 										Team
 									</Disclosure.Button>
 									<Disclosure.Button
 										as="a"
 										href="#"
-										className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+										className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-brand-800"
 									>
 										Settings
 									</Disclosure.Button>
 									<Disclosure.Button
 										as="button"
 										onClick={() => signOut()}
-										className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 w-full text-left"
+										className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-brand-800 w-full text-left"
 									>
 										Sign out
 									</Disclosure.Button>
