@@ -20,35 +20,29 @@ export default function TeamMembersCards({
 	permLevel: PERMISSION;
 }) {
 	async function removeTeamMember(userId: string, teamId: string) {
-		const response = await fetch('/api/v1/teams', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
+		const response = await fetch(
+			`/api/v1/teams/members/${teamId}?userId=${userId}`,
+			{
+				method: 'DELETE',
 			},
-			body: JSON.stringify({
-				action: 'remove-team-member',
-				teamId: teamId,
-				userId: userId,
-			}),
-		});
+		);
 
 		if (response.ok) {
 			window.location.reload();
 		}
 	}
 
-	async function changePermRole(userId: string, role: PERMISSION) {
-		const response = await fetch('/api/v1/teams', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
+	async function changePermRole(
+		userId: string,
+		teamId: string,
+		role: PERMISSION,
+	) {
+		const response = await fetch(
+			`/api/v1/teams/members/${teamId}?role=${role}&userId=${userId}`,
+			{
+				method: 'POST',
 			},
-			body: JSON.stringify({
-				action: 'change-team-member-permissions',
-				userId: userId,
-				permRole: role,
-			}),
-		});
+		);
 
 		if (response.ok) {
 			window.location.reload();
@@ -143,7 +137,11 @@ export default function TeamMembersCards({
 										<div className="-ml-px w-0 flex-1 flex">
 											<Button
 												onClick={async () =>
-													await changePermRole(person.id, 'ADMIN')
+													await changePermRole(
+														person.id,
+														person.teamId as string,
+														'ADMIN',
+													)
 												}
 												className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-yellow-300 font-medium border border-transparent rounded-br-lg hover:text-yellow-200"
 											>
@@ -162,7 +160,11 @@ export default function TeamMembersCards({
 										<div className="-ml-px w-0 flex-1 flex">
 											<Button
 												onClick={async () =>
-													await changePermRole(person.id, 'USER')
+													await changePermRole(
+														person.id,
+														person.teamId as string,
+														'USER',
+													)
 												}
 												className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-yellow-300 font-medium border border-transparent rounded-br-lg hover:text-yellow-200"
 											>
