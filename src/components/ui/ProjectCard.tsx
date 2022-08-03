@@ -17,10 +17,14 @@ export default function ProjectCard({ projects }: { projects: Project[] }) {
 					>
 						<div className="w-full flex items-center justify-between p-6 space-x-6">
 							<div className="flex-1 truncate">
-								<div className="flex items-center space-x-3">
+								<div className="flex flex-col">
 									<h3 className="text-gray-200 text-lg font-bold truncate">
 										{project.name}
 									</h3>
+									<p className="text-brand-200 text-sm italic truncate">
+										<span>Last Updated: </span>
+										{new Date(project.updatedAt).toLocaleDateString()}
+									</p>
 								</div>
 							</div>
 						</div>

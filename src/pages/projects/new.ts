@@ -1,6 +1,6 @@
 import { getSession } from 'next-auth/react';
 import CozzyPrismaProvider from '~/CozzyProviders/CozzyPrismaProvider';
-import { Team } from '~/components/Team';
+import { NewProject } from '~/components/Projects/NewProject';
 
 export async function getServerSideProps(ctx: any) {
 	const session = await getSession(ctx);
@@ -15,6 +15,7 @@ export async function getServerSideProps(ctx: any) {
 		};
 	} else {
 		const team = await cp.getTeamByUserEmail(session?.user?.email as string);
+
 		if (!team) {
 			return {
 				redirect: {
@@ -24,20 +25,12 @@ export async function getServerSideProps(ctx: any) {
 			};
 		}
 
-		const user = await cp.getUserByEmail(session?.user?.email as string);
-
-		const teamMembers = await cp.getTeamMembers(team.id);
-
 		return {
 			props: {
-				users: JSON.parse(JSON.stringify(teamMembers.users)),
-				teamName: team.name,
-				userId: user?.id,
-				userPermission: user?.permission,
-				teamSubscriptionType: team.subscriptionType,
+				teamId: team.id,
 			},
 		};
 	}
 }
 
-export default Team;
+export default NewProject;

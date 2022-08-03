@@ -11,13 +11,14 @@ datasource db {
 }
 
 model Team {
-  id          String       @id @default(cuid())
-  name        String
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  users       User[]
-  teamInvites TeamInvite[]
-  projects    Project[]
+  id               String            @id @default(cuid())
+  name             String
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  subscriptionType TEAM_SUBSCRIPTION @default(FREE)
+  users            User[]
+  teamInvites      TeamInvite[]
+  projects         Project[]
 }
 
 model TeamInvite {
@@ -94,4 +95,9 @@ enum PERMISSION {
   ADMIN
   USER
   NONE
+}
+
+enum TEAM_SUBSCRIPTION {
+  FREE
+  PAID
 }

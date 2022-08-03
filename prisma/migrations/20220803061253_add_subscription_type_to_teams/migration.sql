@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "TEAM_SUBSCRIPTION" AS ENUM ('FREE', 'PAID');
+
+-- AlterTable
+ALTER TABLE "Team" ADD COLUMN     "subscriptionType" "TEAM_SUBSCRIPTION" NOT NULL DEFAULT 'FREE';

@@ -1,5 +1,5 @@
 import { SearchIcon } from '@heroicons/react/outline';
-import { PERMISSION, User } from '@prisma/client';
+import { PERMISSION, TEAM_SUBSCRIPTION, User } from '@prisma/client';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 import Navbar from '../ui/Navbar';
@@ -10,11 +10,13 @@ export function Team({
 	teamName,
 	userId,
 	userPermission,
+	teamSubscriptionType,
 }: {
 	users: User[];
 	teamName: string;
 	userId: string;
 	userPermission: PERMISSION;
+	teamSubscriptionType: TEAM_SUBSCRIPTION;
 }) {
 	const { data: session } = useSession();
 	const [search, setSearch] = React.useState('');
@@ -22,10 +24,13 @@ export function Team({
 		<>
 			<Navbar session={session} />
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div>
+				<div className="flex items-center justify-between gap-2">
 					<h1 className="text-3xl font-bold leading-tight text-brand-200">
 						{teamName} Team
 					</h1>
+					<span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-800">
+						{teamSubscriptionType}
+					</span>
 				</div>
 				<div className="my-4">
 					<div className="mt-1 relative rounded-md shadow-sm">
