@@ -65,8 +65,8 @@ export default function TeamMembersCards({
 							key={person.id}
 							className={
 								!isLocal
-									? 'col-span-1 bg-brand-700 rounded-lg shadow divide-y divide-brand-500'
-									: 'col-span-1 bg-brand-700 rounded-lg shadow'
+									? 'col-span-1 bg-brand-700 border-2 border-brand-600 rounded-lg shadow divide-y divide-brand-500'
+									: 'col-span-1 bg-brand-700 border-2 border-brand-600 rounded-lg shadow'
 							}
 						>
 							<div className="w-full flex items-center justify-between p-6 space-x-6">

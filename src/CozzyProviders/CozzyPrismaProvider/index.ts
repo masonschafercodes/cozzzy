@@ -19,6 +19,11 @@ type createTeamType = {
 	name: string;
 };
 
+type ProjectRequestType = {
+	name: string;
+	teamId: string;
+};
+
 export default class CozzyPrismaProvider {
 	/**
 	 * **********************************************************************
@@ -334,6 +339,78 @@ export default class CozzyPrismaProvider {
 			return teamInvite;
 		}
 	}
+
+	/**
+	 * ***********************************
+	 * Delete Methods
+	 * ***********************************
+	 */
+
+	/**
+	 * **********************************************************************
+	 * **********************************************************************
+	 */
+
+	/**
+	 * **********************************************************************
+	 * PROJECTS METHODS
+	 * **********************************************************************
+	 */
+
+	/**
+	 * ***********************************
+	 * Create Methods
+	 * ***********************************
+	 */
+
+	/**
+	 *
+	 * @param projectData The data to create the project with
+	 * @example
+	 * const project: Project = await createProject({
+	 * 	name: 'Test Project',
+	 * 	teamId: '1',
+	 * });
+	 */
+	async createProject(projectData: ProjectRequestType) {
+		return await prisma.project.create({
+			data: {
+				...projectData,
+			},
+		});
+	}
+
+	/**
+	 * ***********************************
+	 * Read Methods
+	 * ***********************************
+	 */
+
+	/**
+	 *
+	 * @param id The id of the project to get
+	 * @example
+	 * const project: Project | null = await getProjectById('1')
+	 */
+	async getProjectById(id: string) {
+		return await prisma.project.findUnique({ where: { id } });
+	}
+
+	/**
+	 *
+	 * @param teamId The id of the team to get projects for
+	 * @example
+	 * const projects: Project[] = await getProjectsByTeamId('1')
+	 */
+	async getProjectsByTeamId(teamId: string) {
+		return await prisma.project.findMany({ where: { teamId } });
+	}
+
+	/**
+	 * ***********************************
+	 * Update Methods
+	 * ***********************************
+	 */
 
 	/**
 	 * ***********************************

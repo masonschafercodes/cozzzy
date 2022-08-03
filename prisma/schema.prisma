@@ -17,6 +17,7 @@ model Team {
   updatedAt   DateTime     @updatedAt
   users       User[]
   teamInvites TeamInvite[]
+  projects    Project[]
 }
 
 model TeamInvite {
@@ -28,6 +29,15 @@ model TeamInvite {
 
   team Team @relation(fields: [teamId], references: [id])
   user User @relation(fields: [userId], references: [id])
+}
+
+model Project {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  teamId    String
+  team      Team     @relation(fields: [teamId], references: [id])
 }
 
 model Account {

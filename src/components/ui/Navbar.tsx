@@ -81,7 +81,20 @@ export default function Navbar({ session }: { session: Session | null }) {
 													<Menu.Item>
 														{({ active }) => (
 															<a
-																href="#"
+																href="/projects"
+																className={classNames(
+																	active ? 'bg-brand-500' : '',
+																	'block px-4 py-2 text-sm text-gray-400',
+																)}
+															>
+																Projects
+															</a>
+														)}
+													</Menu.Item>
+													<Menu.Item>
+														{({ active }) => (
+															<a
+																href="/settings"
 																className={classNames(
 																	active ? 'bg-brand-500' : '',
 																	'block px-4 py-2 text-sm text-gray-400',
@@ -165,7 +178,14 @@ export default function Navbar({ session }: { session: Session | null }) {
 									</Disclosure.Button>
 									<Disclosure.Button
 										as="a"
-										href="#"
+										href="/projects"
+										className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-brand-800"
+									>
+										Projects
+									</Disclosure.Button>
+									<Disclosure.Button
+										as="a"
+										href="/settings"
 										className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-brand-800"
 									>
 										Settings

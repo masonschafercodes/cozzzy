@@ -7,7 +7,7 @@
 		"url": "https://github.com/masonschafercodes/cozzzy.git"
 	},
 	"scripts": {
-		"dev": "concurrently -c green.bold,blue.bold 'yarn:dev:docker' 'yarn:dev:next'",
+		"dev": "concurrently -c green.bold,blue.bold 'pnpm:dev:docker' 'pnpm:dev:next'",
 		"dev:docker": "docker compose up",
 		"dev:next": "next dev",
 		"build": "next build",
