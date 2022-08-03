@@ -23,7 +23,7 @@ export default function ProjectCard({ projects }: { projects: Project[] }) {
 									</h3>
 									<p className="text-brand-200 text-sm italic truncate">
 										<span>Last Updated: </span>
-										{new Date(project.updatedAt).toLocaleDateString()}
+										{new Date(project.updatedAt).toLocaleString()}
 									</p>
 								</div>
 							</div>

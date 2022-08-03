@@ -43,12 +43,15 @@ export function Team({
 	return (
 		<>
 			<Navbar session={session} />
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div className="max-w-7xl mx-auto my-10 px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between gap-2">
-					<h1 className="text-3xl font-bold leading-tight text-brand-200">
+					<h1 className="text-3xl font-bold leading-tight text-gray-300">
 						{teamName} Team
 					</h1>
 					<div className="flex items-center gap-2">
+						<p className="text-sm text-brand-300 font-semibold">
+							Subscription Status:{' '}
+						</p>
 						<span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-800">
 							{teamSubscriptionType}
 						</span>

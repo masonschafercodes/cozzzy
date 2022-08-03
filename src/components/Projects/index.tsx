@@ -14,9 +14,9 @@ export function Projects({ projects }: { projects: Project[] }) {
 	return (
 		<>
 			<Navbar session={session} />
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div className="max-w-7xl mx-auto my-10 px-4 sm:px-6 lg:px-8">
 				<div>
-					<h1 className="text-3xl font-bold leading-tight text-brand-200">
+					<h1 className="text-3xl font-bold leading-tight text-gray-300">
 						Projects
 					</h1>
 				</div>
