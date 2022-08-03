@@ -3,3 +3,4 @@
 
 pnpm prettier:check
 pnpm typecheck
+pnpm build
