@@ -7,6 +7,7 @@ import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
+import { Button } from './Button';
 
 function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(' ');
@@ -123,12 +124,12 @@ export default function Navbar({ session }: { session: Session | null }) {
 									</div>
 								</div>
 							) : (
-								<button
+								<Button
 									onClick={() => signIn()}
 									className="font-semibold rounded-full inline-flex items-center justify-center border border-transparent transition whitespace-nowrap disabled:opacity-50 disabled:pointer-events-none text-gray-700 border-gray-400 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-600 dark:hover:text-gray-200 text-base px-4 py-2"
 								>
 									Sign in
-								</button>
+								</Button>
 							)}
 							<div className="-mr-2 flex sm:hidden">
 								{/* Mobile menu button */}

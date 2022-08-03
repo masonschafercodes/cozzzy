@@ -16,6 +16,7 @@ model Team {
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   subscriptionType TEAM_SUBSCRIPTION @default(FREE)
+  stripeId         String?           @unique
   users            User[]
   teamInvites      TeamInvite[]
   projects         Project[]

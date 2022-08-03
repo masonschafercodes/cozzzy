@@ -28,6 +28,8 @@ export async function getServerSideProps(ctx: any) {
 		return {
 			props: {
 				teamId: team.id,
+				subscriptionType: team.subscriptionType,
+				numberOfProjects: team.projects.length,
 			},
 		};
 	}

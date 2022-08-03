@@ -1,9 +1,13 @@
-import { PERMISSION } from '@prisma/client';
+import { PERMISSION, TEAM_SUBSCRIPTION } from '@prisma/client';
 import { prisma } from '~/utils/prisma';
 import { TeamInviteNotFound } from '../CozzyErrors/TeamInviteNotFound';
 import { TeamNotFound } from '../CozzyErrors/TeamNotFound';
 import { UserAlreadyInTeamError } from '../CozzyErrors/UserAlreadyInATeamError';
 import { UserNotFoundError } from '../CozzyErrors/UserNotFoundError';
+import initStripe from 'stripe';
+const stripe = new initStripe(process.env.STRIPE_SECRET_KEY as string, {
+	apiVersion: '2022-08-01',
+});
 
 type TeamInviteRequestType = {
 	teamId: string;
@@ -140,6 +144,37 @@ export default class CozzyPrismaProvider {
 		});
 	}
 
+	async createTeamSubscription(teamId: string) {
+		const team = await this.getTeamById(teamId);
+
+		if (!team) {
+			throw new TeamNotFound(`Team with id '${teamId}' not found`);
+		} else if (!team.stripeId) {
+			throw new Error(`Team with id '${teamId}' has no stripe id`);
+		}
+
+		const lineItems = [
+			{
+				price: 'price_1KUMsGBfW0YHBLNxupwvXQLy',
+				quantity: 1,
+			},
+		];
+
+		const session = await stripe.checkout.sessions.create({
+			customer: team.stripeId,
+			mode: 'subscription',
+			payment_method_types: ['card'],
+			line_items: lineItems,
+			success_url: `http://localhost:3000/?payment=success`,
+			cancel_url: `http://localhost:3000/?payment=cancelled`,
+			metadata: {
+				teamId: team.id,
+			},
+		});
+
+		return session;
+	}
+
 	/**
 	 * ***********************************
 	 * Read Methods
@@ -174,6 +209,9 @@ export default class CozzyPrismaProvider {
 				where: {
 					id: user.teamId,
 				},
+				include: {
+					projects: true,
+				},
 			});
 		}
 	}
@@ -203,6 +241,45 @@ export default class CozzyPrismaProvider {
 	 * Update Methods
 	 * ***********************************
 	 */
+
+	async appendStripedId(teamId: string) {
+		const team = await this.getTeamById(teamId);
+
+		if (!team) {
+			throw new TeamNotFound(`Team with id '${teamId}' not found`);
+		} else if (team.stripeId) {
+			return null;
+		}
+
+		const customer = await stripe.customers.create({ name: team.name });
+
+		return await prisma.team.update({
+			where: { id: teamId },
+			data: {
+				stripeId: customer.id,
+			},
+		});
+	}
+
+	async updateTeamSubscription(
+		stripeId: string,
+		subscriptionType: TEAM_SUBSCRIPTION,
+	) {
+		const team = await prisma.team.findUnique({
+			where: { stripeId: stripeId },
+		});
+
+		if (!team) {
+			throw new TeamNotFound(`Team with stripeId '${stripeId}' not found`);
+		}
+
+		return await prisma.team.update({
+			where: { id: team.id },
+			data: {
+				subscriptionType: subscriptionType,
+			},
+		});
+	}
 
 	/**
 	 * ***********************************

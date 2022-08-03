@@ -28,10 +28,19 @@ export async function getServerSideProps(ctx: any) {
 
 		const teamMembers = await cp.getTeamMembers(team.id);
 
+		try {
+			if (!team.stripeId) {
+				await cp.appendStripedId(team.id);
+			}
+		} catch (e: any) {
+			console.error(e);
+		}
+
 		return {
 			props: {
 				users: JSON.parse(JSON.stringify(teamMembers.users)),
 				teamName: team.name,
+				teamId: team.id,
 				userId: user?.id,
 				userPermission: user?.permission,
 				teamSubscriptionType: team.subscriptionType,

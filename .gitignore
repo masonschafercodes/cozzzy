@@ -31,6 +31,9 @@ yarn-error.log*
 
 .idea/
 
+stripe
+ngrok
+
 # vercel
 .vercel
 
