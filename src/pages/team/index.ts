@@ -30,7 +30,7 @@ export async function getServerSideProps(ctx: any) {
 
 		return {
 			props: {
-				teamMembers,
+				users: JSON.parse(JSON.stringify(teamMembers.users)),
 				teamName: team.name,
 				userId: user?.id,
 				userPermission: user?.permission,

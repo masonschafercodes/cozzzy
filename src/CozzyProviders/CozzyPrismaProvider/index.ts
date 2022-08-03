@@ -186,9 +186,11 @@ export default class CozzyPrismaProvider {
 			include: { users: true },
 		});
 
-		if (!teamWithUsers) return [];
+		if (!teamWithUsers?.users) return { users: [] };
 
-		return teamWithUsers.users;
+		return {
+			users: teamWithUsers.users,
+		};
 	}
 
 	/**

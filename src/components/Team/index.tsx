@@ -6,12 +6,12 @@ import Navbar from '../ui/Navbar';
 import TeamMembersCards from '../ui/TeamMembersCards';
 
 export function Team({
-	teamMembers,
+	users,
 	teamName,
 	userId,
 	userPermission,
 }: {
-	teamMembers: User[];
+	users: User[];
 	teamName: string;
 	userId: string;
 	userPermission: PERMISSION;
@@ -50,12 +50,12 @@ export function Team({
 					<TeamMembersCards
 						people={
 							search !== ''
-								? teamMembers.filter((person) => {
+								? users.filter((person) => {
 										return person.name
 											?.toLowerCase()
 											.includes(search.toLowerCase());
 								  })
-								: teamMembers
+								: users
 						}
 						userId={userId}
 						permLevel={userPermission}
