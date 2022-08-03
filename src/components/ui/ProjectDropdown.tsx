@@ -2,6 +2,7 @@ import React from 'react';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { DotsVerticalIcon, PencilAltIcon } from '@heroicons/react/solid';
+import { Button } from './Button';
 
 function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(' ');
@@ -31,7 +32,7 @@ export default function ProjectDropdown() {
 						<div className="py-1">
 							<Menu.Item>
 								{({ active }) => (
-									<a
+									<Button
 										href="/projects/new"
 										className={classNames(
 											active ? 'bg-brand-500 text-gray-200' : 'text-gray-200',
@@ -43,7 +44,7 @@ export default function ProjectDropdown() {
 											aria-hidden="true"
 										/>
 										New Project
-									</a>
+									</Button>
 								)}
 							</Menu.Item>
 						</div>
